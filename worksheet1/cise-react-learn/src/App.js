@@ -1,5 +1,5 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
   return (
@@ -11,12 +11,11 @@ function App() {
         </p>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="https://www.aut.ac.nz"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Agile is about Values and
-          Principles
+          Agile is about Values and Principles
         </a>
       </header>
     </div>
