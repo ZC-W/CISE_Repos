@@ -8,7 +8,7 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return "Hello, Zhicong";
+    return this.appService.getHello();
   }
 
   @Get('/api/articles')
