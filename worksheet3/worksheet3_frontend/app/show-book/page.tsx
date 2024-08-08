@@ -2,7 +2,7 @@
 "use client";
 
 // import ShowBookDetails component
-import ShowBookDetails from "@src/components/ShowBookDetails";
+import ShowBookDetails from "@../../../src/components/ShowBookDetails";
 
 // define and export the default function component named ShowBook
 export default function ShowBook() {

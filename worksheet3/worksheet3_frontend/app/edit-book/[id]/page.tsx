@@ -2,7 +2,7 @@
 "use client";
 
 // import UpdateBookInfo component from the components folder
-import UpdateBookInfo from "@src/components/UpdateBookInfo";
+import UpdateBookInfo from "../../../src/components/UpdateBookInfo";
 
 // define and export the default function component ShowBook
 export default function ShowBook() {
