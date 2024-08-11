@@ -1,6 +1,8 @@
 import { GetStaticProps, NextPage } from "next";
+import { useEffect, useState } from "react";
 import SortableTable from "../../components/table/SortableTable";
-import data from "../../utils/dummydata";
+import { fetchArticles } from "../../utils/apiService";
+
 interface ArticlesInterface {
   id: string;
   title: string;
@@ -11,9 +13,11 @@ interface ArticlesInterface {
   claim: string;
   evidence: string;
 }
+
 type ArticlesProps = {
   articles: ArticlesInterface[];
 };
+
 const Articles: NextPage<ArticlesProps> = ({ articles }) => {
   const headers: { key: keyof ArticlesInterface; label: string }[] = [
     { key: "title", label: "Title" },
@@ -24,26 +28,40 @@ const Articles: NextPage<ArticlesProps> = ({ articles }) => {
     { key: "claim", label: "Claim" },
     { key: "evidence", label: "Evidence" },
   ];
+
   return (
     <div className="container">
       <h1>Articles Index Page</h1>
       <p>Page containing a table of articles:</p>
-      <SortableTable headers={headers} data={articles} />
+      {articles.length > 0 ? (
+        <SortableTable headers={headers} data={articles} />
+      ) : (
+        <p>No articles found.</p>
+      )}
     </div>
   );
 };
+
 export const getStaticProps: GetStaticProps<ArticlesProps> = async (_) => {
-  // Map the data to ensure all articles have consistent property names
-  const articles = data.map((article) => ({
-    id: article.id ?? article._id,
-    title: article.title,
-    authors: article.authors,
-    source: article.source,
-    pubyear: article.pubyear,
-    doi: article.doi,
-    claim: article.claim,
-    evidence: article.evidence,
-  }));
+  let articles: ArticlesInterface[] = [];
+
+  try {
+    // Fetch articles from the backend API
+    const fetchedArticles = await fetchArticles();
+    articles = fetchedArticles.map((article: any) => ({
+      id: article.id ?? article._id,
+      title: article.title,
+      authors: article.authors,
+      source: article.source,
+      pubyear: article.pubyear,
+      doi: article.doi,
+      claim: article.claim,
+      evidence: article.evidence,
+    }));
+  } catch (error) {
+    console.error("Failed to fetch articles:", error);
+  }
+
   return {
     props: {
       articles,
