@@ -2,6 +2,7 @@ import { GetStaticProps, NextPage } from "next";
 import { useEffect, useState } from "react";
 import SortableTable from "../../components/table/SortableTable";
 import { fetchArticles } from "../../utils/apiService";
+import Dropdown from "@/components/dropdown/Dropdown";
 
 interface ArticlesInterface {
   id: string;
@@ -19,6 +20,8 @@ type ArticlesProps = {
 };
 
 const Articles: NextPage<ArticlesProps> = ({ articles }) => {
+  //create selectedYear variable for year filter
+  const [selectedYear, setSelectedYear] = useState<string>('');
   const headers: { key: keyof ArticlesInterface; label: string }[] = [
     { key: "title", label: "Title" },
     { key: "authors", label: "Authors" },
@@ -29,12 +32,26 @@ const Articles: NextPage<ArticlesProps> = ({ articles }) => {
     { key: "linked_discussion", label: "Linked Discussion" },
   ];
 
+  //articles year filter 
+  const filteredArticles = selectedYear
+    ? articles.filter(article =>article.pubyear === selectedYear): articles;
+
+  //extract unique publication years for the dropdown
+  const uniqueYears = Array.from(new Set(articles.map(article => article.pubyear)));
+
   return (
     <div className="container">
       <h1>Articles Index Page</h1>
+      <div style={{marginBottom: '10px'}}>
+        <label htmlFor="yearDropdown" style ={{marginRight: '10px'}}>Select publication year:</label>
+      <Dropdown
+        options={uniqueYears}
+        onSelect={setSelectedYear}
+    />
+    </div>
       <p>Page containing a table of articles:</p>
-      {articles.length > 0 ? (
-        <SortableTable headers={headers} data={articles} />
+      {filteredArticles.length > 0 ? (
+        <SortableTable headers={headers} data={filteredArticles} />
       ) : (
         <p>No articles found.</p>
       )}
