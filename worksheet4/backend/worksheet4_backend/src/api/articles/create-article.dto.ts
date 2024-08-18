@@ -1,9 +1,9 @@
 export class CreateArticleDto {
   //Property to hold the data, and their types
-  authors: string;
+  authors: string[];
   title: string;
   source: string;
-  pubyear: string;
+  pubyear: number;
   doi: string;
   claim: string;
   evidence: string;
