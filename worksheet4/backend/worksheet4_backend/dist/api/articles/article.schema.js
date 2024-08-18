@@ -16,19 +16,19 @@ let Article = class Article {
 exports.Article = Article;
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
-    __metadata("design:type", String)
-], Article.prototype, "title", void 0);
+    __metadata("design:type", Array)
+], Article.prototype, "authors", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
-], Article.prototype, "authors", void 0);
+], Article.prototype, "title", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], Article.prototype, "source", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], Article.prototype, "pubyear", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
@@ -37,11 +37,11 @@ __decorate([
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], Article.prototype, "claim", void 0);
+], Article.prototype, "summary", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
-], Article.prototype, "evidence", void 0);
+], Article.prototype, "linked_discussion", void 0);
 exports.Article = Article = __decorate([
     (0, mongoose_1.Schema)()
 ], Article);

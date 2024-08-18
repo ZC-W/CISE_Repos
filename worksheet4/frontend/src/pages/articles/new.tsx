@@ -1,5 +1,6 @@
 import { FormEvent, useState } from "react";
 import formStyles from "../../styles/Form.module.scss";
+import axios from "axios";
 const NewDiscussion = () => {
   const [title, setTitle] = useState("");
   const [authors, setAuthors] = useState<string[]>([]);
@@ -10,17 +11,27 @@ const NewDiscussion = () => {
   const [linkedDiscussion, setLinkedDiscussion] = useState("");
   const submitNewArticle = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(
-      JSON.stringify({
-        title,
-        authors,
-        source,
-        publication_year: pubYear,
-        doi,
-        summary,
-        linked_discussion: linkedDiscussion,
-      })
-    );
+    const articleData = {
+      title,
+      authors,
+      source,
+      publication_year: pubYear,
+      doi,
+      summary,
+      linked_discussion: linkedDiscussion,
+    };
+
+    console.log(JSON.stringify(articleData)); //for testing
+
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/articles`,
+        articleData
+      ); // send data to backend
+      console.log("Article submitted successfully:", response.data);
+    } catch (error) {
+      console.error("Failed to submit article:", error);
+    }
   };
   // Some helper methods for the authors array
   const addAuthor = () => {

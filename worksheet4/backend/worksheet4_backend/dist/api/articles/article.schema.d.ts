@@ -1,13 +1,13 @@
 import { Document } from 'mongoose';
 export type ArticleDocument = Article & Document;
 export declare class Article {
+    authors: string[];
     title: string;
-    authors: string;
     source: string;
-    pubyear: string;
+    pubyear: number;
     doi: string;
-    claim: string;
-    evidence: string;
+    summary: string;
+    linked_discussion: string;
 }
 export declare const ArticleSchema: import("mongoose").Schema<Article, import("mongoose").Model<Article, any, any, any, Document<unknown, any, Article> & Article & {
     _id: import("mongoose").Types.ObjectId;

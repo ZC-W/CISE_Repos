@@ -2,8 +2,8 @@ export declare class CreateArticleDto {
     authors: string;
     title: string;
     source: string;
-    pubyear: string;
+    pubyear: number;
     doi: string;
-    claim: string;
-    evidence: string;
+    summary: string;
+    linked_discussion: string;
 }

@@ -25,6 +25,7 @@ let ArticlesController = class ArticlesController {
             return await this.articleService.create(createArticleDto);
         }
         catch (error) {
+            console.error('Error creating article:', error);
             throw new common_1.HttpException({
                 status: common_1.HttpStatus.BAD_REQUEST,
                 error: 'Unable to create this article',

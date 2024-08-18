@@ -22,6 +22,7 @@ export class ArticlesController {
     try {
       return await this.articleService.create(createArticleDto);
     } catch (error) {
+      console.error('Error creating article:', error); //record error msg
       throw new HttpException(
         {
           status: HttpStatus.BAD_REQUEST,

@@ -6,12 +6,12 @@ import { fetchArticles } from "../../utils/apiService";
 interface ArticlesInterface {
   id: string;
   title: string;
-  authors: string;
+  authors: string[];
   source: string;
-  pubyear: string;
+  pubyear: number;
   doi: string;
-  claim: string;
-  evidence: string;
+  summary: string;
+  linked_discussion: string;
 }
 
 type ArticlesProps = {
@@ -25,8 +25,8 @@ const Articles: NextPage<ArticlesProps> = ({ articles }) => {
     { key: "source", label: "Source" },
     { key: "pubyear", label: "Publication Year" },
     { key: "doi", label: "DOI" },
-    { key: "claim", label: "Claim" },
-    { key: "evidence", label: "Evidence" },
+    { key: "summary", label: "Summary" },
+    { key: "linked_discussion", label: "Linked Discussion" },
   ];
 
   return (
@@ -48,16 +48,22 @@ export const getStaticProps: GetStaticProps<ArticlesProps> = async (_) => {
   try {
     // Fetch articles from the backend API
     const fetchedArticles = await fetchArticles();
-    articles = fetchedArticles.map((article: any) => ({
-      id: article.id ?? article._id,
-      title: article.title,
-      authors: article.authors,
-      source: article.source,
-      pubyear: article.pubyear,
-      doi: article.doi,
-      claim: article.claim,
-      evidence: article.evidence,
-    }));
+
+    articles = fetchedArticles.map((article: any) => {
+      console.log("Summary:", article.summary);
+      console.log("Linked Discussion:", article.linked_discussion);
+
+      return {
+        id: article.id ?? article._id,
+        title: article.title ?? "Untitled",
+        authors: article.authors ?? [],
+        source: article.source ?? "Unknown Source",
+        pubyear: article.pubyear ?? null,
+        doi: article.doi ?? "No DOI",
+        summary: article.summary ?? "No summary available",
+        linked_discussion: article.linked_discussion ?? "No linked discussion",
+      };
+    });
   } catch (error) {
     console.error("Failed to fetch articles:", error);
   }

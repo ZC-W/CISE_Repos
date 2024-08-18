@@ -6,25 +6,25 @@ export type ArticleDocument = Article & Document;
 @Schema()
 export class Article {
   @Prop({ required: true })
-  title: string;
+  authors: string[];
 
   @Prop({ required: true })
-  authors: string;
+  title: string;
 
   @Prop()
   source: string;
 
   @Prop()
-  pubyear: string;
+  pubyear: number;
 
   @Prop()
   doi: string;
 
   @Prop()
-  claim: string;
+  summary: string;
 
   @Prop()
-  evidence: string;
+  linked_discussion: string;
 }
 
 export const ArticleSchema = SchemaFactory.createForClass(Article);
