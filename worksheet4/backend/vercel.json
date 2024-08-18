@@ -2,18 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "dist/main.js",
+      "src": "worksheet4_backend/dist/main.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "dist/main.js"
-    },
-    {
       "src": "/(.*)",
-      "dest": "dist/main.js"
+      "dest": "worksheet4_backend/dist/main.js"
     }
   ]
 }

@@ -2,9 +2,9 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  //enable cors
+  // Enable CORS with dynamic origin
   app.enableCors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',//frontend locahost
+    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
     credentials: true
   });
   const port = process.env.PORT || 8082;
