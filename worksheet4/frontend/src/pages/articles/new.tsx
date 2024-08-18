@@ -5,20 +5,20 @@ const NewDiscussion = () => {
   const [title, setTitle] = useState("");
   const [authors, setAuthors] = useState<string[]>([]);
   const [source, setSource] = useState("");
-  const [pubYear, setPubYear] = useState<number>(0);
+  const [pubyear, setPubYear] = useState<number>(0);
   const [doi, setDoi] = useState("");
   const [summary, setSummary] = useState("");
-  const [linkedDiscussion, setLinkedDiscussion] = useState("");
+  const [linked_discussion, setLinkedDiscussion] = useState("");
   const submitNewArticle = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const articleData = {
       title,
       authors,
       source,
-      publication_year: pubYear,
+      pubyear,
       doi,
       summary,
-      linked_discussion: linkedDiscussion,
+      linked_discussion,
     };
 
     console.log(JSON.stringify(articleData)); //for testing
@@ -29,6 +29,16 @@ const NewDiscussion = () => {
         articleData
       ); // send data to backend
       console.log("Article submitted successfully:", response.data);
+      //display message
+      alert("Submission complete!");
+      // Reset form fields after submission
+      setTitle("");
+      setAuthors([]);
+      setSource("");
+      setPubYear(0);
+      setDoi("");
+      setSummary("");
+      setLinkedDiscussion("");
     } catch (error) {
       console.error("Failed to submit article:", error);
     }
@@ -104,13 +114,13 @@ const NewDiscussion = () => {
             setSource(event.target.value);
           }}
         />
-        <label htmlFor="pubYear">Publication Year:</label>
+        <label htmlFor="pubyear">Publication Year:</label>
         <input
           className={formStyles.formItem}
           type="number"
-          name="pubYear"
-          id="pubYear"
-          value={pubYear}
+          name="pubyear"
+          id="pubyear"
+          value={pubyear}
           onChange={(event) => {
             const val = event.target.value;
             if (val === "") {

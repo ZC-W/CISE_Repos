@@ -1,10 +1,13 @@
 import React from "react";
+import styles from "../../styles/Form.module.scss";
+
 interface SortableTableProps {
   headers: { key: string; label: string }[];
   data: any[];
 }
+
 const SortableTable: React.FC<SortableTableProps> = ({ headers, data }) => (
-  <table>
+  <table className={styles.table}>
     <thead>
       <tr>
         {headers.map((header) => (
@@ -23,4 +26,5 @@ const SortableTable: React.FC<SortableTableProps> = ({ headers, data }) => (
     </tbody>
   </table>
 );
+
 export default SortableTable;

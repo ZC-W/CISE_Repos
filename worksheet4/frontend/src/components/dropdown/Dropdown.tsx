@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 interface DropdownProps {
-  options: string[];
+  options: number[];
   onSelect: (value: string) => void;
 }
 

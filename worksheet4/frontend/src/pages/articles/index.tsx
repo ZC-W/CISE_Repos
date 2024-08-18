@@ -21,7 +21,7 @@ type ArticlesProps = {
 
 const Articles: NextPage<ArticlesProps> = ({ articles }) => {
   //create selectedYear variable for year filter
-  const [selectedYear, setSelectedYear] = useState<string>('');
+  const [selectedYear, setSelectedYear] = useState<string>("");
   const headers: { key: keyof ArticlesInterface; label: string }[] = [
     { key: "title", label: "Title" },
     { key: "authors", label: "Authors" },
@@ -32,23 +32,25 @@ const Articles: NextPage<ArticlesProps> = ({ articles }) => {
     { key: "linked_discussion", label: "Linked Discussion" },
   ];
 
-  //articles year filter 
+  //articles year filter
   const filteredArticles = selectedYear
-    ? articles.filter(article =>article.pubyear === selectedYear): articles;
+    ? articles.filter((article) => article.pubyear === parseInt(selectedYear))
+    : articles;
 
   //extract unique publication years for the dropdown
-  const uniqueYears = Array.from(new Set(articles.map(article => article.pubyear)));
+  const uniqueYears = Array.from(
+    new Set(articles.map((article) => article.pubyear))
+  );
 
   return (
     <div className="container">
       <h1>Articles Index Page</h1>
-      <div style={{marginBottom: '10px'}}>
-        <label htmlFor="yearDropdown" style ={{marginRight: '10px'}}>Select publication year:</label>
-      <Dropdown
-        options={uniqueYears}
-        onSelect={setSelectedYear}
-    />
-    </div>
+      <div style={{ marginBottom: "10px" }}>
+        <label htmlFor="yearDropdown" style={{ marginRight: "10px" }}>
+          Select publication year:
+        </label>
+        <Dropdown options={uniqueYears} onSelect={setSelectedYear} />
+      </div>
       <p>Page containing a table of articles:</p>
       {filteredArticles.length > 0 ? (
         <SortableTable headers={headers} data={filteredArticles} />
