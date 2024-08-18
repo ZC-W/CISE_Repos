@@ -1,5 +1,5 @@
 export declare class CreateArticleDto {
-    authors: string;
+    authors: string[];
     title: string;
     source: string;
     pubyear: number;
